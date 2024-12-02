@@ -50,8 +50,8 @@
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 78.37838F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.62162F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 144F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 133F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(744, 294);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -80,7 +80,7 @@
             this.btnRun.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRun.Location = new System.Drawing.Point(3, 126);
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(738, 138);
+            this.btnRun.Size = new System.Drawing.Size(738, 31);
             this.btnRun.TabIndex = 2;
             this.btnRun.Text = "RURA";
             this.btnRun.UseVisualStyleBackColor = true;
@@ -89,10 +89,11 @@
             // tbResult
             // 
             this.tbResult.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbResult.Location = new System.Drawing.Point(3, 270);
+            this.tbResult.Location = new System.Drawing.Point(3, 163);
+            this.tbResult.Multiline = true;
             this.tbResult.Name = "tbResult";
             this.tbResult.ReadOnly = true;
-            this.tbResult.Size = new System.Drawing.Size(738, 20);
+            this.tbResult.Size = new System.Drawing.Size(738, 128);
             this.tbResult.TabIndex = 3;
             // 
             // Form1

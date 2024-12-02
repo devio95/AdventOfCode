@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AdventOfCode.Days;
+using AdventOfCode.Properties;
+using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace AdventOfCode
@@ -10,6 +13,11 @@ namespace AdventOfCode
         public Form1()
         {
             InitializeComponent();
+            if (string.IsNullOrWhiteSpace(Settings.Default.Path) == false)
+            {
+                _path = Settings.Default.Path;
+                tbPath.Text = _path;
+            } 
         }
 
         private void btnGetFile_Click(object sender, EventArgs e)
@@ -29,7 +37,25 @@ namespace AdventOfCode
 
         private void btnRun_Click(object sender, EventArgs e)
         {
+            try
+            {
+                IAlgoritm algoritm = new D1();
+                if (File.Exists(_path))
+                {
+                    Settings.Default.Path = _path;
+                    Settings.Default.Save();
+                    tbResult.Text = algoritm.Run(File.ReadAllText(_path));
+                }
+                else
+                {
+                    tbResult.Text = "No file";
+                }
 
+            }
+            catch (Exception ex)
+            {
+                tbResult.Text = ex.ToString();
+            }
         }
     }
 }
