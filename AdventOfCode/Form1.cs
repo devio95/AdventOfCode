@@ -39,7 +39,7 @@ namespace AdventOfCode
         {
             try
             {
-                IAlgoritm algoritm = new D4_2();
+                IAlgoritm algoritm = new D5();
                 if (File.Exists(_path))
                 {
                     Settings.Default.Path = _path;
