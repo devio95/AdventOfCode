@@ -23,15 +23,33 @@ namespace AdventOfCode.Days
                 Direction direction = row[0] > row[1] ? Direction.Down : Direction.Up;
 
                 bool res = true;
+                bool removed = false;
                 for (int i = 1; i < row.Length; i++)
                 {
-                    int first = row[i - 1];
-                    int second = row[i];
+                    if (res == false && removed == true)
+                    {
+                        break;
+                    }
+
+                    int first = 0;
+                    int second = 0;
+                    if (res == false)
+                    {
+                        removed = true;
+                        first = row[i - 2];
+                        second = row[i];
+                    }
+                    else
+                    {
+                        first = row[i - 1];
+                        second = row[i];
+                    }
+
 
                     if (first == second)
                     {
                         res = false;
-                        break;
+                        continue;
                     }
 
                     int abs = Math.Abs(first - second);
@@ -41,13 +59,13 @@ namespace AdventOfCode.Days
                             || (direction == Direction.Down && second > first))
                         {
                             res = false;
-                            break;
+                            continue;
                         }
                     }
                     else
                     {
                         res = false;
-                        break;
+                        continue;
                     }
                 }
 
