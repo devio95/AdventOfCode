@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 
 namespace AdventOfCode.Days
@@ -13,7 +12,7 @@ namespace AdventOfCode.Days
             LoadData(text);
 
             Direction direction = Direction.Up;
-            while(true)
+            while (true)
             {
                 Point nextStep = GetNextPoint(direction);
                 if (nextStep.X < 0 || nextStep.X == _field.GetLength(0) || nextStep.Y < 0 || nextStep.Y == _field.GetLength(1))
