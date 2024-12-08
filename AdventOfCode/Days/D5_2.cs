@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AdventOfCode.Days
 {
-    public class D5 : IAlgoritm
+    public class D5_2 : IAlgoritm
     {
         Dictionary<int, List<int>> _beforeRules;
         Dictionary<int, List<int>> _afterRules;
@@ -16,45 +16,98 @@ namespace AdventOfCode.Days
 
             foreach (List<int> update in _updates)
             {
-                bool result = true;
-                for (int i = 0; i < update.Count; i++)
+                if (IsUpdateCorrect(update) == false)
                 {
-                    for (int j = 0; j < update.Count; j++)
+                    List<int> correctUpdate = ConvertToCorrectUdpate(update);
+                    int index = ((correctUpdate.Count + 1) / 2) - 1;
+                    totalResult += correctUpdate[index];
+                }
+            }
+
+            return totalResult.ToString();
+        }
+
+        private bool IsUpdateCorrect(List<int> update)
+        {
+            for (int i = 0; i < update.Count; i++)
+            {
+                for (int j = 0; j < update.Count; j++)
+                {
+                    if (i == j)
                     {
-                        if (i == j)
+                        continue;
+                    }
+
+                    if (i < j)
+                    {
+                        if (CompareBefore(update[i], update[j]) == false)
                         {
-                            continue;
+                            return false;
                         }
-                        
-                        if (i < j)
+                    }
+                    else
+                    {
+                        if (CompareAfter(update[i], update[j]) == false)
                         {
-                            if (CompareBefore(update[i], update[j]) == false)
-                            {
-                                result = false;
-                            }
+                            return false;
                         }
-                        else
-                        {
-                            if (CompareAfter(update[i], update[j]) == false)
-                            {
-                                result = false;
-                            }
-                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        private List<int> ConvertToCorrectUdpate(List<int> update)
+        {
+            List<int> toReturn = new List<int>();
+
+            while (update.Count > 0)
+            {
+                int number = FindNext(update);
+                toReturn.Add(number);
+
+                update.Remove(number);
+            }
+
+            return toReturn;
+        }
+
+        private int FindNext(List<int> update)
+        {
+            for (int i = 0; i < update.Count; i++)
+            {
+                bool result = true;
+                for (int j = 0; j < update.Count; j++)
+                {
+                    if (i == j)
+                    {
+                        continue;
+                    }
+
+                    if (_afterRules.ContainsKey(update[i]) == false)
+                    {
+                        return update[i];
+                    }
+
+                    if (_afterRules[update[i]].Exists(x => x == update[j]))
+                    {
+                        result = false;
+                        break;
                     }
                 }
 
                 if (result)
                 {
-                    int index = ((update.Count + 1) / 2) - 1;
-                    totalResult += update[index];
+                    return update[i];
                 }
             }
 
-            return totalResult.ToString();  
+            throw new Exception("Przeciez to nigdy nie nastąpi");
         }
 
         private void LoadData(string text)
-        { 
+        {
             string[] lines = text.Split(' ');
             LoadRules(lines[0]);
             LoadUpdates(lines[1]);
