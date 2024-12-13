@@ -24,7 +24,9 @@ namespace AdventOfCode
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = Application.StartupPath;
+                string initialDirectory = string.IsNullOrWhiteSpace(Settings.Default.Path) ? Application.StartupPath :
+                    Path.GetDirectoryName(Settings.Default.Path);
+                openFileDialog.InitialDirectory = initialDirectory;
                 openFileDialog.Filter = "Txt (*.txt)|*.txt";
                 openFileDialog.FilterIndex = 1;
                 if (openFileDialog.ShowDialog(this) == DialogResult.OK)
@@ -39,7 +41,7 @@ namespace AdventOfCode
         {
             try
             {
-                IAlgoritm algoritm = new D7_2();
+                IAlgoritm algoritm = new D8();
                 if (File.Exists(_path))
                 {
                     Settings.Default.Path = _path;

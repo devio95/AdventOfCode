@@ -60,6 +60,7 @@
     <Compile Include="Days\D6_2.cs" />
     <Compile Include="Days\D7.cs" />
     <Compile Include="Days\D7_2.cs" />
+    <Compile Include="Days\D8.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
